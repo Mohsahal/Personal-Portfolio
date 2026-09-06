@@ -20,7 +20,8 @@ node_modules
 *.njsproj
 *.sln
 *.sw?
-.npmrc
+dist/
+dist-ssr/
 backup/
 .env
 ._*
