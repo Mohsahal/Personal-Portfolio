@@ -28,21 +28,7 @@ const Career = () => {
               generation and secure JWT authentication.
             </p>
           </div>
-          <div className="career-info-box">
-            <div className="career-info-in">
-              <div className="career-role">
-                <h4>Full Stack AI Dev</h4>
-                <h5>AI &amp; Web Systems</h5>
-              </div>
-              <h3>2024–25</h3>
-            </div>
-            <p>
-              Architected and deployed production-ready systems including FutureFind
-              (AI-powered ATS matching, skill gap analysis, AI mock interviews),
-              Veloura (scalable MERN fashion e-commerce with Razorpay &amp; RBAC),
-              and Infob Digital Solutions (modern business portfolio &amp; dynamic CMS).
-            </p>
-          </div>
+         
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
@@ -56,6 +42,22 @@ const Career = () => {
               academic and hands-on focus in full-stack software development, data
               structures, database management systems (MongoDB, PostgreSQL, MySQL),
               and modern cloud &amp; containerized architectures.
+            </p>
+          </div>
+          <div className="career-info-box">
+            <div className="career-info-in">
+              <div className="career-role">
+                <h4>Founder &amp; IT Solutions</h4>
+                <h5>Infob Digital Solutions · IT Services &amp; Web Systems</h5>
+              </div>
+              <h3>NOW</h3>
+            </div>
+            <p>
+              Leading an IT services business providing end-to-end digital solutions,
+              custom web applications, dynamic CMS platforms, SEO optimization, and
+              AI-driven workflows. Architecting and deploying scalable production systems
+              including Infob Digital Solutions, FutureFind (AI ATS &amp; mock interviews),
+              and Veloura (scalable MERN e-commerce).
             </p>
           </div>
         </div>

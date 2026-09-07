@@ -60,15 +60,7 @@ const Contact = () => {
             >
               Email <MdArrowOutward />
             </a>
-            <a
-              href="/Mohammed_Sahal_PK.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor="disable"
-              className="contact-social"
-            >
-              Resume PDF <MdArrowOutward />
-            </a>
+           
           </div>
           <div className="contact-box">
             <h2>

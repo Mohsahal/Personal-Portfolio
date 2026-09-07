@@ -43,14 +43,7 @@ const Loading = ({ percent }: { percent: number }) => {
     });
   };
 
-  const getPhaseTag = (val: number) => {
-    if (val < 25) return "MERN STACK ARCHITECTURE";
-    if (val < 50) return "AI & NEURAL INTEGRATIONS";
-    if (val < 75) return "3D WEBGL ENVIRONMENT";
-    if (val < 100) return "FINALIZING INTERFACE";
-    return "WELCOME • EXPERIENCE READY";
-  };
-
+ 
   const displayPercent = Math.min(100, Math.max(0, percent));
 
   return (
@@ -60,31 +53,12 @@ const Loading = ({ percent }: { percent: number }) => {
       <div className="kinetic-ambient kinetic-ambient-2"></div>
       <div className="kinetic-noise-overlay"></div>
 
-      {/* Top Header */}
-      <header className="kinetic-header">
-        <div className="kinetic-brand">
-          <span className="kinetic-monogram">MS</span>
-          <span className="kinetic-brand-name">MOHAMMED SAHAL PK</span>
-        </div>
-        <div className="kinetic-header-status">
-          <span className="kinetic-pulse-dot"></span>
-          <span className="kinetic-status-text">
-            {displayPercent < 100 ? "COMPILING ASSETS" : "READY"}
-          </span>
-        </div>
-      </header>
+      
 
       {/* Main Center Content */}
       <main className="kinetic-main">
         {/* Animated Subtitle / Phase Indicator */}
-        <div className="kinetic-phase">
-          <span className="kinetic-phase-num">
-            {displayPercent < 100
-              ? `0${Math.floor(displayPercent / 25) + 1} //`
-              : "✦ //"}
-          </span>
-          <span className="kinetic-phase-title">{getPhaseTag(displayPercent)}</span>
-        </div>
+
 
         {/* Massive Typographic Percentage Counter */}
         <div className="kinetic-counter-wrap">
@@ -95,20 +69,7 @@ const Loading = ({ percent }: { percent: number }) => {
         </div>
 
         {/* Minimalist Glowing Progress Line */}
-        <div className="kinetic-progress-container">
-          <div className="kinetic-progress-track">
-            <div
-              className="kinetic-progress-fill"
-              style={{ width: `${displayPercent}%` }}
-            >
-              <div className="kinetic-progress-glow"></div>
-            </div>
-          </div>
-          <div className="kinetic-progress-labels">
-            <span>FULL STACK AI DEVELOPER</span>
-            <span>{displayPercent}%</span>
-          </div>
-        </div>
+        
 
         {/* Interactive Enter Action */}
         <div
@@ -116,22 +77,11 @@ const Loading = ({ percent }: { percent: number }) => {
             loaded ? "kinetic-action-visible" : ""
           }`}
         >
-          <button
-            className="kinetic-enter-btn"
-            onClick={handleEnter}
-            data-cursor="disable"
-          >
-            <span className="kinetic-btn-text">EXPLORE PORTFOLIO</span>
-            <span className="kinetic-btn-arrow">→</span>
-          </button>
+         
         </div>
       </main>
 
-      {/* Bottom Footer */}
-      <footer className="kinetic-footer">
-        <span className="kinetic-location">KERALA, INDIA</span>
-        <span className="kinetic-version">PORTFOLIO v2.0 • 2026</span>
-      </footer>
+    
     </div>
   );
 };

@@ -73,16 +73,15 @@ export function initialFX() {
   );
 
   var landingText3 = new SplitText(".landing-h2-info-1", TextProps);
-  var landingText4 = new SplitText(".landing-h2-1", TextProps);
-  var landingText5 = new SplitText(".landing-h2-2", TextProps);
 
   LoopText(landingText2, landingText3);
-  LoopText(landingText4, landingText5);
 }
 
 function LoopText(Text1: SplitText, Text2: SplitText) {
-  var tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
-  const delay = 4;
+  gsap.set(Text2.chars, { opacity: 0, y: 80 });
+
+  var tl = gsap.timeline({ repeat: -1, repeatDelay: 1.2 });
+  const delay = 3.5;
   const delay2 = delay * 2 + 1;
 
   tl.fromTo(
@@ -90,34 +89,36 @@ function LoopText(Text1: SplitText, Text2: SplitText) {
     { opacity: 0, y: 80 },
     {
       opacity: 1,
-      duration: 1.2,
+      duration: 1,
       ease: "power3.inOut",
       y: 0,
-      stagger: 0.1,
+      stagger: 0.05,
       delay: delay,
     },
     0
   )
     .fromTo(
       Text1.chars,
-      { y: 80 },
+      { y: 80, opacity: 0 },
       {
-        duration: 1.2,
+        opacity: 1,
+        duration: 1,
         ease: "power3.inOut",
         y: 0,
-        stagger: 0.1,
+        stagger: 0.05,
         delay: delay2,
       },
       1
     )
     .fromTo(
       Text1.chars,
-      { y: 0 },
+      { y: 0, opacity: 1 },
       {
         y: -80,
-        duration: 1.2,
+        opacity: 0,
+        duration: 1,
         ease: "power3.inOut",
-        stagger: 0.1,
+        stagger: 0.05,
         delay: delay,
       },
       0
@@ -126,9 +127,10 @@ function LoopText(Text1: SplitText, Text2: SplitText) {
       Text2.chars,
       {
         y: -80,
-        duration: 1.2,
+        opacity: 0,
+        duration: 1,
         ease: "power3.inOut",
-        stagger: 0.1,
+        stagger: 0.05,
         delay: delay2,
       },
       1

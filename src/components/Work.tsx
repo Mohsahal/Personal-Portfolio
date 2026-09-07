@@ -6,6 +6,13 @@ import { FaGithub } from "react-icons/fa6";
 
 const projects = [
   {
+    title: "Veloura",
+    category: "Fashion E-Commerce Platform",
+    tools: "React.js, Node.js, Express, MongoDB, Razorpay Gateway, JWT & RBAC, Search & Filtering",
+    image: "/images/veloura.png",
+    link: "https://shoppingcart-mern-choi.onrender.com/shop/home",
+    github: "https://github.com/Mohsahal/portfolio",
+  }, {
     title: "FutureFind",
     category: "AI Career Companion & ATS Matcher",
     tools: "MERN Stack, AI/ML, ATS Compatibility Scoring, Skill Gap Analysis, AI Mock Interviews",
@@ -13,14 +20,7 @@ const projects = [
     link: "https://ai-powered-career-companion-system-1.onrender.com/",
     github: "https://github.com/Mohsahal/AI-Powered-Career-Companion-System",
   },
-  {
-    title: "Veloura",
-    category: "Fashion E-Commerce Platform",
-    tools: "React.js, Node.js, Express, MongoDB, Razorpay Gateway, JWT & RBAC, Search & Filtering",
-    image: "/images/veloura.png",
-    link: "https://shoppingcart-mern-choi.onrender.com/shop/home",
-    github: "https://github.com/Mohsahal/portfolio",
-  },
+
   {
     title: "Infob Digital Solutions",
     category: "Business Portfolio & Digital Presence",

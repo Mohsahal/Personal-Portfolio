@@ -90,16 +90,16 @@ const WhatIDo = () => {
               <h3>AGENTIC AI &amp; FULL STACK</h3>
               <h4>Autonomous Workflows &amp; Web Systems</h4>
               <p>
-                Architecting autonomous agentic AI workflows, LLM orchestration pipelines, and integrating intelligent features—such as ATS resume matching, skill gap analysis, and AI-driven mock interviews—into high-performance web applications.
+                Architecting autonomous agentic AI workflows, multi-agent systems, and robust LLM orchestration pipelines—seamlessly integrated with high-performance, scalable full-stack web applications.
               </p>
               <h5>Skillset &amp; tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">Agentic Workflows</div>
-                <div className="what-tags">Python (AI &amp; Backend)</div>
                 <div className="what-tags">Multi-Agent Systems</div>
+                <div className="what-tags">Agentic Workflows</div>
+                <div className="what-tags">LLM Orchestration</div>
                 <div className="what-tags">React.js</div>
                 <div className="what-tags">Node.js &amp; Express</div>
-                <div className="what-tags">AI/ML &amp; LLM APIs</div>
+                <div className="what-tags">Python (AI &amp; Backend)</div>
                 <div className="what-tags">Docker &amp; CI/CD</div>
               </div>
               <div className="what-arrow"></div>
@@ -127,16 +127,16 @@ const WhatIDo = () => {
               <h3>BACKEND &amp; SCALABILITY</h3>
               <h4>Secure &amp; Production Architecture</h4>
               <p>
-                Building robust RESTful APIs, role-based access control (RBAC), JWT authentication, Razorpay payments, and database management across MongoDB, PostgreSQL, and MySQL.
+                Engineering resilient RESTful APIs, secure authentication systems (JWT/RBAC), seamless payment gateway integrations, and optimized database architectures across MongoDB, PostgreSQL, and MySQL.
               </p>
               <h5>Skillset &amp; tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">JavaScript (ES6+)</div>
-                <div className="what-tags">Python</div>
+                <div className="what-tags">RESTful APIs</div>
                 <div className="what-tags">MongoDB &amp; PostgreSQL</div>
                 <div className="what-tags">MySQL</div>
-                <div className="what-tags">JWT &amp; RBAC</div>
+                <div className="what-tags">JWT &amp; RBAC Auth</div>
                 <div className="what-tags">Razorpay Gateway</div>
+                <div className="what-tags">Python &amp; Node.js</div>
                 <div className="what-tags">Postman &amp; Git</div>
               </div>
               <div className="what-arrow"></div>
