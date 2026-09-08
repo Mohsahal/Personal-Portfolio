@@ -26,7 +26,7 @@ const textures = imageUrls.map((url) => textureLoader.load(url));
 
 const sphereGeometry = new THREE.SphereGeometry(1, 28, 28);
 
-const spheres = [...Array(30)].map(() => ({
+const spheres = [...Array(20)].map(() => ({
   scale: [0.7, 1, 0.8, 1, 1][Math.floor(Math.random() * 5)],
 }));
 
@@ -49,15 +49,15 @@ function SphereGeo({
 
   useFrame((_state, delta) => {
     if (!isActive) return;
-    delta = Math.min(0.1, delta);
+    delta = Math.min(0.05, delta);
     const impulse = vec
       .copy(api.current!.translation())
       .normalize()
       .multiply(
         new THREE.Vector3(
-          -50 * delta * scale,
-          -150 * delta * scale,
-          -50 * delta * scale
+          -45 * delta * scale,
+          -120 * delta * scale,
+          -45 * delta * scale
         )
       );
 
@@ -128,29 +128,20 @@ const TechStack = () => {
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY || document.documentElement.scrollTop;
-      const threshold = document
-        .getElementById("work")!
-        .getBoundingClientRect().top;
-      setIsActive(scrollY > threshold);
-    };
-    document.querySelectorAll(".header a").forEach((elem) => {
-      const element = elem as HTMLAnchorElement;
-      element.addEventListener("click", () => {
-        const interval = setInterval(() => {
-          handleScroll();
-        }, 10);
-        setTimeout(() => {
-          clearInterval(interval);
-        }, 1000);
-      });
-    });
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    const el = document.querySelector(".techstack");
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsActive(entry.isIntersecting);
+      },
+      { rootMargin: "150px" }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
+
   const materials = useMemo(() => {
     return textures.map(
       (texture) =>
@@ -172,7 +163,8 @@ const TechStack = () => {
 
       <Canvas
         shadows
-        gl={{ alpha: true, stencil: false, depth: false, antialias: false }}
+        dpr={[1, 1.5]}
+        gl={{ alpha: true, stencil: false, depth: true, antialias: false, powerPreference: "high-performance" }}
         camera={{ position: [0, 0, 20], fov: 32.5, near: 1, far: 100 }}
         onCreated={(state) => (state.gl.toneMappingExposure = 1.5)}
         className="tech-canvas"
@@ -204,7 +196,7 @@ const TechStack = () => {
           environmentRotation={[0, 4, 2]}
         />
         <EffectComposer enableNormalPass={false}>
-          <N8AO color="#0f002c" aoRadius={2} intensity={1.15} />
+          <N8AO color="#0f002c" aoRadius={1.5} intensity={1} />
         </EffectComposer>
       </Canvas>
     </div>

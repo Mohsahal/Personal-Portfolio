@@ -30,9 +30,10 @@ const Scene = () => {
       const renderer = new THREE.WebGLRenderer({
         alpha: true,
         antialias: true,
+        powerPreference: "high-performance",
       });
       renderer.setSize(container.width, container.height);
-      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1;
       canvasDiv.current.appendChild(renderer.domElement);
@@ -108,6 +109,10 @@ const Scene = () => {
       }
       const animate = () => {
         requestAnimationFrame(animate);
+        const scrollY = window.scrollY || document.documentElement.scrollTop;
+        // Pause heavy render calculations when scrolled past the What I Do section
+        if (scrollY > window.innerHeight * 3.8) return;
+
         if (headBone) {
           handleHeadRotation(
             headBone,
