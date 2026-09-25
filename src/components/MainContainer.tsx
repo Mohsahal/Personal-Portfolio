@@ -27,6 +27,9 @@ const MainContainer = ({ children }: PropsWithChildren) => {
       }, 150);
     };
     setSplitText();
+    import("./utils/initialFX").then((module) => {
+      module.initialFX();
+    });
     window.addEventListener("resize", resizeHandler);
     return () => {
       clearTimeout(timeoutId);
