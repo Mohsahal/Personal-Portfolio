@@ -1,88 +1,142 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import "./styles/Loading.css";
 import { useLoading } from "../context/LoadingProvider";
 
 const Loading = ({ percent }: { percent: number }) => {
   const { setIsLoading } = useLoading();
-  const [loaded, setLoaded] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [clicked, setClicked] = useState(false);
+  const [isExiting, setIsExiting] = useState(false);
+  const [isReadyToExit, setIsReadyToExit] = useState(false);
+  const minTimeElapsed = useRef(false);
 
+  // Guarantee the logo show plays for at least 1.6s so the animation feels intentional and cinematic
   useEffect(() => {
-    if (percent >= 100) {
-      const timer1 = setTimeout(() => {
-        setLoaded(true);
-        const timer2 = setTimeout(() => {
-          setIsLoaded(true);
-        }, 600);
-        return () => clearTimeout(timer2);
-      }, 300);
-      return () => clearTimeout(timer1);
+    const timer = setTimeout(() => {
+      minTimeElapsed.current = true;
+      if (percent >= 100) {
+        setIsReadyToExit(true);
+      }
+    }, 1600);
+
+    // Safety fallback to prevent any stalling on slow connections
+    const safetyTimer = setTimeout(() => {
+      setIsReadyToExit(true);
+    }, 4500);
+
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(safetyTimer);
+    };
+  }, [percent]);
+
+  // When percent >= 100 and min time elapsed, trigger the exit transition
+  useEffect(() => {
+    if (percent >= 100 && minTimeElapsed.current) {
+      setIsReadyToExit(true);
     }
   }, [percent]);
 
+  // Trigger exit and kick off hero entrance FX in perfect sync
   useEffect(() => {
-    if (isLoaded) {
-      const timer = setTimeout(() => {
-        handleEnter();
-      }, 800);
-      return () => clearTimeout(timer);
-    }
-  }, [isLoaded]);
+    if (isReadyToExit && !isExiting) {
+      setIsExiting(true);
 
-  const handleEnter = () => {
-    if (clicked) return;
-    setClicked(true);
-    import("./utils/initialFX").then((module) => {
-      setTimeout(() => {
+      import("./utils/initialFX").then((module) => {
         if (module.initialFX) {
           module.initialFX();
         }
+      });
+
+      const exitTimer = setTimeout(() => {
         setIsLoading(false);
       }, 850);
-    });
-  };
+      return () => clearTimeout(exitTimer);
+    }
+  }, [isReadyToExit, isExiting, setIsLoading]);
 
- 
   const displayPercent = Math.min(100, Math.max(0, percent));
 
+  const handleSkip = () => {
+    setIsReadyToExit(true);
+  };
+
   return (
-    <div className={`kinetic-loader ${clicked ? "kinetic-loader-exit" : ""}`}>
-      {/* Dynamic Ambient Nebula Glows */}
-      <div className="kinetic-ambient kinetic-ambient-1"></div>
-      <div className="kinetic-ambient kinetic-ambient-2"></div>
-      <div className="kinetic-noise-overlay"></div>
+    <aside
+      className={`logo-reveal-overlay ${isExiting ? "logo-reveal-exit" : ""}`}
+      onClick={handleSkip}
+      title="Click anywhere to enter"
+      aria-label="Portfolio Loading"
+    >
+      {/* Background ambient lighting */}
+      <div className="logo-reveal-glow-1" />
+      <div className="logo-reveal-glow-2" />
+      <div className="logo-reveal-grid" />
 
-      
+      {/* Center Stage: Monogram & Logo Reveal */}
+      <div className="logo-reveal-center">
+        {/* Animated Emblem Badge */}
+        <div className="logo-badge-container">
+          <div className="logo-badge-ring" />
+          <div className="logo-badge-box">
+            <svg
+              className="logo-badge-svg"
+              viewBox="0 0 100 100"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#ffffff" />
+                  <stop offset="50%" stopColor="#5eead4" />
+                  <stop offset="100%" stopColor="#14b8a6" />
+                </linearGradient>
+              </defs>
 
-      {/* Main Center Content */}
-      <main className="kinetic-main">
-        {/* Animated Subtitle / Phase Indicator */}
+              {/* Geometric hexagon outline */}
+              <polygon
+                points="50,6 88,28 88,72 50,94 12,72 12,28"
+                stroke="url(#logoGrad)"
+                strokeWidth="2.5"
+                strokeDasharray="260"
+                strokeDashoffset="0"
+                className="logo-badge-polygon"
+              />
+            </svg>
 
+            {/* Glowing Monogram */}
+            <div className="logo-monogram">
+              <span className="logo-char-m">M</span>
+              <span className="logo-dot">·</span>
+              <span className="logo-char-s">S</span>
+            </div>
+          </div>
+        </div>
 
-        {/* Massive Typographic Percentage Counter */}
-        <div className="kinetic-counter-wrap">
-          <h1 className="kinetic-counter">
-            <span className="kinetic-counter-digits">{displayPercent}</span>
-            <span className="kinetic-counter-pct">%</span>
+        {/* Name & Title Typography */}
+        <div className="logo-text-group">
+          <h1 className="logo-name">
+            <span>MOHAMMED</span> <span>SAHAL</span>
           </h1>
+          <div className="logo-subtitle-wrap">
+            <span className="logo-status-dot" />
+            <p className="logo-subtitle">FULL STACK AI DEVELOPER</p>
+          </div>
         </div>
 
-        {/* Minimalist Glowing Progress Line */}
-        
-
-        {/* Interactive Enter Action */}
-        <div
-          className={`kinetic-action-wrap ${
-            loaded ? "kinetic-action-visible" : ""
-          }`}
-        >
-         
+        {/* Sleek Laser Loading Track */}
+        <div className="logo-progress-section">
+          <div className="logo-progress-bar-track">
+            <div
+              className="logo-progress-bar-fill"
+              style={{ width: `${displayPercent}%` }}
+            />
+          </div>
+          <div className="logo-progress-meta">
+            <span className="logo-progress-label">INITIALIZING SYSTEM</span>
+            <span className="logo-progress-value">{displayPercent}%</span>
+          </div>
         </div>
-      </main>
-
-    
-    </div>
+      </div>
+    </aside>
   );
 };
 

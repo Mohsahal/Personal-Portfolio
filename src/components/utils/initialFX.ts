@@ -2,14 +2,24 @@ import { SplitText } from "gsap/SplitText";
 import gsap from "gsap";
 import { smoother } from "../Navbar";
 
+let hasInitialized = false;
+
 export function initialFX() {
+  if (hasInitialized) return;
+  hasInitialized = true;
+
   document.body.style.overflowY = "auto";
-  smoother.paused(false);
-  document.getElementsByTagName("main")[0].classList.add("main-active");
+  if (smoother && typeof smoother.paused === "function") {
+    smoother.paused(false);
+  }
+  const mainElem = document.getElementsByTagName("main")[0];
+  if (mainElem) {
+    mainElem.classList.add("main-active");
+  }
   gsap.to("body", {
     backgroundColor: "#0a0e17",
     duration: 0.5,
-    delay: 1,
+    delay: 0.5,
   });
 
   var landingText = new SplitText(
