@@ -153,3 +153,19 @@ body {
     letter-spacing: 1px;
   }
 }
+
+/* Hardware Acceleration & Layer Promotion for Butter-Smooth Scroll */
+#smooth-content {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.character-model,
+.landing-container,
+.about-section,
+.whatIDO,
+.career-section {
+  will-change: transform;
+  transform: translateZ(0);
+}

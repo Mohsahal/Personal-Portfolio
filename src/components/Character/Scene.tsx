@@ -12,6 +12,8 @@ import {
 } from "./utils/mouseUtils";
 import setAnimations from "./utils/animationUtils";
 import { setProgress } from "../Loading";
+import { gsap } from "gsap";
+import { smoother } from "../Navbar";
 
 const Scene = () => {
   const canvasDiv = useRef<HTMLDivElement | null>(null);
@@ -33,7 +35,7 @@ const Scene = () => {
         powerPreference: "high-performance",
       });
       renderer.setSize(container.width, container.height);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1;
       canvasDiv.current.appendChild(renderer.domElement);
@@ -106,8 +108,11 @@ const Scene = () => {
         landingDiv.addEventListener("touchend", onTouchEnd);
       }
       const animate = () => {
-        requestAnimationFrame(animate);
-        const scrollY = window.scrollY || document.documentElement.scrollTop;
+        const scrollY =
+          smoother && typeof smoother.scrollTop === "function"
+            ? smoother.scrollTop()
+            : window.scrollY || document.documentElement.scrollTop;
+
         // Pause heavy render calculations when scrolled past the What I Do section
         if (scrollY > window.innerHeight * 3.8) return;
 
@@ -128,8 +133,11 @@ const Scene = () => {
         }
         renderer.render(scene, camera);
       };
-      animate();
+
+      gsap.ticker.add(animate);
+
       return () => {
+        gsap.ticker.remove(animate);
         clearTimeout(debounce);
         scene.clear();
         renderer.dispose();
