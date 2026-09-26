@@ -103,7 +103,6 @@
   left: 50%;
   transform: translate(-50%, 100%) scale(1.4);
   opacity: 0;
-  will-change: transform, opacity;
 }
 
 .character-model {
